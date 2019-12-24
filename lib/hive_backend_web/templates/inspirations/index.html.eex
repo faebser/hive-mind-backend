@@ -1,0 +1,30 @@
+<h1>Listing Inspirations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Date for</th>
+      <th>Deleted</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for inspirations <- @inspirations do %>
+    <tr>
+      <td><%= inspirations.content %></td>
+      <td><%= inspirations.date_for %></td>
+      <td><%= inspirations.deleted %></td>
+
+      <td>
+        <%= link "Show", to: Routes.inspirations_path(@conn, :show, inspirations) %>
+        <%= link "Edit", to: Routes.inspirations_path(@conn, :edit, inspirations) %>
+        <%= link "Delete", to: Routes.inspirations_path(@conn, :delete, inspirations), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Inspirations", to: Routes.inspirations_path(@conn, :new) %></span>

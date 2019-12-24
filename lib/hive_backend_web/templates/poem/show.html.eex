@@ -1,0 +1,23 @@
+<h1>Show Poem</h1>
+
+<ul>
+
+  <li>
+    <strong>Content:</strong>
+    <%= @poem.content %>
+  </li>
+
+  <li>
+    <strong>Date for:</strong>
+    <%= @poem.date_for %>
+  </li>
+
+  <li>
+    <strong>Deleted:</strong>
+    <%= @poem.deleted %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.poem_path(@conn, :edit, @poem) %></span>
+<span><%= link "Back", to: Routes.poem_path(@conn, :index) %></span>

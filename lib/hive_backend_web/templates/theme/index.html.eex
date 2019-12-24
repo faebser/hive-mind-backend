@@ -1,0 +1,30 @@
+<h1>Listing Themes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Date for</th>
+      <th>Deleted</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for theme <- @themes do %>
+    <tr>
+      <td><%= theme.content %></td>
+      <td><%= theme.date_for %></td>
+      <td><%= theme.deleted %></td>
+
+      <td>
+        <%= link "Show", to: Routes.theme_path(@conn, :show, theme) %>
+        <%= link "Edit", to: Routes.theme_path(@conn, :edit, theme) %>
+        <%= link "Delete", to: Routes.theme_path(@conn, :delete, theme), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Theme", to: Routes.theme_path(@conn, :new) %></span>

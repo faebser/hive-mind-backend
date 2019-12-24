@@ -1,0 +1,30 @@
+<h1>Listing Poems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Date for</th>
+      <th>Deleted</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for poem <- @poems do %>
+    <tr>
+      <td><%= poem.content %></td>
+      <td><%= poem.date_for %></td>
+      <td><%= poem.deleted %></td>
+
+      <td>
+        <%= link "Show", to: Routes.poem_path(@conn, :show, poem) %>
+        <%= link "Edit", to: Routes.poem_path(@conn, :edit, poem) %>
+        <%= link "Delete", to: Routes.poem_path(@conn, :delete, poem), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Poem", to: Routes.poem_path(@conn, :new) %></span>

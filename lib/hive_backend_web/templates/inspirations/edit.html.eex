@@ -1,0 +1,5 @@
+<h1>Edit Inspirations</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.inspirations_path(@conn, :update, @inspirations)) %>
+
+<span><%= link "Back", to: Routes.inspirations_path(@conn, :index) %></span>

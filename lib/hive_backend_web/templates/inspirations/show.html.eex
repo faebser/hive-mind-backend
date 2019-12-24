@@ -1,0 +1,23 @@
+<h1>Show Inspirations</h1>
+
+<ul>
+
+  <li>
+    <strong>Content:</strong>
+    <%= @inspirations.content %>
+  </li>
+
+  <li>
+    <strong>Date for:</strong>
+    <%= @inspirations.date_for %>
+  </li>
+
+  <li>
+    <strong>Deleted:</strong>
+    <%= @inspirations.deleted %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.inspirations_path(@conn, :edit, @inspirations) %></span>
+<span><%= link "Back", to: Routes.inspirations_path(@conn, :index) %></span>

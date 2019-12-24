@@ -1,0 +1,23 @@
+<h1>Show Theme</h1>
+
+<ul>
+
+  <li>
+    <strong>Content:</strong>
+    <%= @theme.content %>
+  </li>
+
+  <li>
+    <strong>Date for:</strong>
+    <%= @theme.date_for %>
+  </li>
+
+  <li>
+    <strong>Deleted:</strong>
+    <%= @theme.deleted %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.theme_path(@conn, :edit, @theme) %></span>
+<span><%= link "Back", to: Routes.theme_path(@conn, :index) %></span>
