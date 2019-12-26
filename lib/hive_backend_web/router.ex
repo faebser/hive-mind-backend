@@ -14,7 +14,7 @@ defmodule HiveBackendWeb.Router do
   end
 
   scope "/poem-admin", HiveBackendWeb do
-    pipe_through :browser
+    pipe_through p:browser
 
     resources "/users", UserController
     resources "/themes", ThemeController

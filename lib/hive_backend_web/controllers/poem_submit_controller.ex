@@ -28,11 +28,11 @@ defmodule HiveBackendWeb.PoemSubmitController do
 
 
   	# send to riemann
-  	Riemannx.send_async [
-  		service: "submit request",
-  		metric: System.monotonic_time - start,
-  		description: "request duration"
-  	]
+  	# Riemannx.send_async [
+  	# 	service: "submit request",
+  	# 	metric: System.monotonic_time - start,
+  	# 	description: "request duration"
+  	# ]
 
   	case status do
   		{:ok, _} -> json con, %{inserted: true}

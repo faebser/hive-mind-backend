@@ -19,12 +19,12 @@ defmodule HiveBackendWeb.ApiController do
   		_ ->  %TodayRequest{theme_content: t.content, date_for: t.date_for, theme_id: t.id}
   	end
 
-  	# send to riemann
-  	Riemannx.send_async [
-  		service: "today request",
-  		metric: System.monotonic_time - start,
-  		description: "request duration"
-  	]
+  	# # send to riemann
+  	# Riemannx.send_async [
+  	# 	service: "today request",
+  	# 	metric: System.monotonic_time - start,
+  	# 	description: "request duration"
+  	# ]
 
   	# return something here
   	json con, j
