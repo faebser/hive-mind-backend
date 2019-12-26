@@ -4,7 +4,7 @@ defmodule HiveBackend.MixProject do
   def project do
     [
       app: :hive_backend,
-      version: "0.1.51",
+      version: "0.1.52",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -34,7 +34,6 @@ defmodule HiveBackend.MixProject do
   defp deps do
     [
       {:phoenix, "~> 1.4.3"},
-      {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
