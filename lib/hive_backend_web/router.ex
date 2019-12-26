@@ -13,7 +13,7 @@ defmodule HiveBackendWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/poem-admin/", HiveBackendWeb do
+  scope "/poem-admin", HiveBackendWeb do
     pipe_through :browser
 
     resources "/users", UserController
