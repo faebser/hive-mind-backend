@@ -35,3 +35,4 @@ hive_backend-*.tar
 # variables.
 /config/*.secret.exs
 .deliver/releases/
+out/
