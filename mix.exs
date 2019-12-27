@@ -4,7 +4,7 @@ defmodule HiveBackend.MixProject do
   def project do
     [
       app: :hive_backend,
-      version: "0.1.52",
+      version: "0.1.54",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -42,7 +42,7 @@ defmodule HiveBackend.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:riemannx, "~> 4.0"},
+      #{:riemannx, "~> 4.0"},
       {:edeliver, "~> 1.7"},
       {:distillery, "~> 2.0", warn_missing: false}
     ]
