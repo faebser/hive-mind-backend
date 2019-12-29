@@ -68,28 +68,28 @@ config :hive_backend, HiveBackend.Repo,
   pool_size: 10
 
 
-config :riemannx, [
-  host: "localhost", # The riemann server
-  event_host: "hive_mind_backend", # You can override the host name sent to riemann if you want (see: Host Injection)
-  send_timeout: 30_000, # Synchronous send timeout
-  checkout_timeout: 30_000, # Timeout for checking out a poolboy worker
-  type: :batch, # The type of connection you want to run (:tcp, :udp, :tls, :combined, :batch)
-  settings_module: Riemannx.Settings.Default, # The backend used for reading settings back
-  metrics_module: Riemannx.Metrics.Default, # The backend used for sending metrics
-  use_micro: true, # Set to false if you use a riemann version before 0.2.13
-  batch_settings: [
-    type: :combined, # The underlying connection to use when using batching.
-    size: 50, # The size of batches to send to riemann.
-    interval: {1, :seconds} # The interval at which to send batches.
-  ],
-  tcp: [
-    port: 5555,
-    retry_count: 5, # How many times to re-attempt a TCP connection
-    retry_interval: 1000, # Interval to wait before the next TCP connection attempt (milliseconds).
-    priority: :high, # Priority to give TCP workers.
-    options: [], # Specify additional options to be passed to gen_tcp (NOTE: [:binary, nodelay: true, packet: 4, active: true] will be added to whatever you type here as they are deemed essential)
-    pool_size: 5, # How many TCP workers should be in the pool.
-    max_overflow: 5, # Under heavy load how many more TCP workers can be created to meet demand?
-    strategy: :fifo # The poolboy strategy for retrieving workers from the queue
-  ]
-]
+# config :riemannx, [
+#   host: "localhost", # The riemann server
+#   event_host: "hive_mind_backend", # You can override the host name sent to riemann if you want (see: Host Injection)
+#   send_timeout: 30_000, # Synchronous send timeout
+#   checkout_timeout: 30_000, # Timeout for checking out a poolboy worker
+#   type: :batch, # The type of connection you want to run (:tcp, :udp, :tls, :combined, :batch)
+#   settings_module: Riemannx.Settings.Default, # The backend used for reading settings back
+#   metrics_module: Riemannx.Metrics.Default, # The backend used for sending metrics
+#   use_micro: true, # Set to false if you use a riemann version before 0.2.13
+#   batch_settings: [
+#     type: :combined, # The underlying connection to use when using batching.
+#     size: 50, # The size of batches to send to riemann.
+#     interval: {1, :seconds} # The interval at which to send batches.
+#   ],
+#   tcp: [
+#     port: 5555,
+#     retry_count: 5, # How many times to re-attempt a TCP connection
+#     retry_interval: 1000, # Interval to wait before the next TCP connection attempt (milliseconds).
+#     priority: :high, # Priority to give TCP workers.
+#     options: [], # Specify additional options to be passed to gen_tcp (NOTE: [:binary, nodelay: true, packet: 4, active: true] will be added to whatever you type here as they are deemed essential)
+#     pool_size: 5, # How many TCP workers should be in the pool.
+#     max_overflow: 5, # Under heavy load how many more TCP workers can be created to meet demand?
+#     strategy: :fifo # The poolboy strategy for retrieving workers from the queue
+#   ]
+# ]

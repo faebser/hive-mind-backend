@@ -35,7 +35,7 @@ environment :dev do
 end
 
 environment :prod do
-  set include_erts: false
+  set include_erts: true
   set include_src: false
   set cookie: :"JupgvMa.6J%?om*hpezqYnT$J^O%^:Jp7NmW9Q4p>A>FU;`Vb/@gm&$kMm|S[/WR"
   set vm_args: "rel/vm.args"
@@ -48,8 +48,7 @@ end
 
 release :hive_backend do
   set version: current_version(:hive_backend)
-  set applications: [
-    :runtime_tools
+  set commands: [
+    migrate: "rel/commands/migrate.sh"
   ]
 end
-
