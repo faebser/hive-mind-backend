@@ -36,3 +36,4 @@ hive_backend-*.tar
 /config/*.secret.exs
 .deliver/releases/
 out/
+rel/artifacts/
