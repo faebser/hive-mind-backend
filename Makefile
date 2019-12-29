@@ -36,3 +36,10 @@ deploy: rel/artifacts/$(APP_NAME)-$(APP_VSN).tar.gz
 	scp rel/artifacts/hive_backend-0.1.54.tar.gz elixir-prod@tofu.wtf:releases
 	ssh elixir-prod@tofu.wtf mkdir -p /home/elixir-prod/deploy/$(APP_NAME)
 	ssh elixir-prod@tofu.wtf tar -xzf /home/elixir-prod/releases/$(APP_NAME)-$(APP_VSN).tar.gz -C /home/elixir-prod/deploy/$(APP_NAME)
+
+
+stop:
+	ssh elixir-prod@tofu.wtf ./deploy/hive_backend/bin/hive_backend stop
+
+start:
+	ssh elixir-prod@tofu.wtf ./deploy/hive_backend/bin/hive_backend start
