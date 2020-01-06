@@ -11,7 +11,8 @@ use Mix.Config
 # before starting your production server.
 config :hive_backend, HiveBackendWeb.Endpoint,
   http: [:inet6, port: 8083],
-  url: [host: "tofu.wtf", port: 80],
+  url: [host: "tofu.wtf/poems", port: 80],
+  static_url: [path: "/static/hive_backend"],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production

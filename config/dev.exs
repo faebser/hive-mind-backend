@@ -8,9 +8,9 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :hive_backend, HiveBackendWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: 8083],
   debug_errors: true,
-  code_reloader: true,
+  code_reloader: false,
   check_origin: false,
   watchers: []
 
