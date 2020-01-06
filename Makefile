@@ -37,9 +37,10 @@ rel/artifacts/$(APP_NAME)-$(APP_VSN).tar.gz: $(shell find lib -type f) $(shell f
 
 deploy: rel/artifacts/$(APP_NAME)-$(APP_VSN).tar.gz 
 	scp rel/artifacts/$(APP_NAME)-$(APP_VSN).tar.gz elixir-prod@tofu.wtf:releases
+	ssh elixir-prod@tofu.wtf rm -rf /home/elixir-prod/deploy/$(APP_NAME)
 	ssh elixir-prod@tofu.wtf mkdir -p /home/elixir-prod/deploy/$(APP_NAME)
 	ssh elixir-prod@tofu.wtf tar -xzf /home/elixir-prod/releases/$(APP_NAME)-$(APP_VSN).tar.gz -C /home/elixir-prod/deploy/$(APP_NAME)
-	ssh elixir-prod@tofu.wtf ln -fs /home/elixir-prod/deploy/$(APP_NAME)/lib/$(APP_NAME)-$(APP_VSN)/priv/static static
+	ssh elixir-prod@tofu.wtf ln -fs /home/elixir-prod/deploy/$(APP_NAME)/lib/$(APP_NAME)-$(APP_VSN)/priv/static /home/elixir-prod/deploy/$(APP_NAME)
 
 
 stop:
