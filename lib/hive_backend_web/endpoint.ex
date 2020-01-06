@@ -10,9 +10,9 @@ defmodule HiveBackendWeb.Endpoint do
   # You should set gzip to true if you are running phx.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/",
+    at: "/files",
     from: :hive_backend,
-    gzip: false,
+    gzip: true,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
