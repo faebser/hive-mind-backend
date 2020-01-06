@@ -31,7 +31,7 @@ environment :dev do
   # dev mode.
   set dev_mode: true
   set include_erts: false
-  set cookie: :"BVDo<K797x.{lNQ5jikTKXyA52$?f&%w:0;KT87th]spKm50llse@xlQ~MngV8sR"
+  set cookie: "BVDo<K797x.{lNQ5jikTKXyA52$?f&%w:0;KT87th]spKm50llse@xlQ~MngV8sR"
 end
 
 environment :prod do
