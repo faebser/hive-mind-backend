@@ -19,8 +19,10 @@ export MIX_ENV=prod
 mix deps.get
 # Run an explicit clean to remove any build artifacts from the host
 mix do clean, compile --force
+# digest
+mix phx.digest
 # Build the release
-mix distillery.release
+mix distillery.release --env=prod
 # Copy tarball to output
 cp "_build/prod/rel/$APP_NAME/releases/$APP_VSN/$APP_NAME.tar.gz" rel/artifacts/"$APP_NAME-$APP_VSN.tar.gz"
 
