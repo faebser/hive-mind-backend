@@ -29,7 +29,7 @@ defmodule HiveBackendWeb.Router do
 
     get "/today", ApiController, :today
     post "/submit", PoemSubmitController, :submit
-    post "/new-user", NewUserController, :new
+    get "/new-user", NewUserController, :new
 
   end
 end
