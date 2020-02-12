@@ -6,15 +6,15 @@ defmodule HiveBackendWeb.PoemSubmitController do
   alias HiveBackend.TodayRequest
   alias HiveBackend.Poems.Theme
   alias HiveBackend.Poems.Poem
-
   alias HiveBackend.Accounts.User
 
-  plug HiveBackendWeb.Plugs.CheckParams, fields: ["user_id", "content"]
-
+  plug HiveBackendWeb.Plugs.CheckParams, fields: ["user_id", "content", "date_for"]
 
   def submit(con, params) do
   	# add poem to database
   	start = System.monotonic_time
+
+  	IO.inspect params["user_id"]
 
   	u = User |> Repo.get_by( user_uuid: params["user_id"] )
   	t = Theme |> Repo.get_by( date_for: Date.utc_today )

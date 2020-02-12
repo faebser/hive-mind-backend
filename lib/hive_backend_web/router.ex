@@ -28,6 +28,7 @@ defmodule HiveBackendWeb.Router do
     pipe_through :api
 
     get "/today", ApiController, :today
+    get "/date/:date", ApiController, :date
     post "/submit", PoemSubmitController, :submit
     get "/new-user", NewUserController, :new
 
