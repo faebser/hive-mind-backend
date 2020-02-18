@@ -48,21 +48,26 @@
 		font-size: 1.8rem;
 		letter-spacing: 1.3px;
 		font-weight: normal;
-		margin: 4rem 0 2.5rem 0;
+		margin: 6rem 0 2.5rem 0;
 	}
 
-	span {
-		font-family: 'space_groteskmedium';
-		font-size: 20px;
-		letter-spacing: 1.3px;
-		font-feature-settings: 'tnum';
-		-webkit-font-feature-settings: 'tnum';
-		-moz-font-feature-settings: 'tnum';
+	span.tip {
+		text-decoration: underline;
+		text-decoration-style: dashed;
+		cursor: help;
 	}
 
 	h1 + p,
 	h2 + p {
 		margin-top: 0; 
+	}
+
+	.tippy-tooltip {
+		font-family: 'space_groteskmedium';
+		font-size: 15px;
+		letter-spacing: 1.3px;
+		padding: 0.5rem 0.75rem;
+		font-weight: normal;
 	}
 
 	p,
@@ -71,22 +76,30 @@
 		letter-spacing: 1px;
 		font-size: 2.5rem;
 		font-weight: normal;
+		list-style: square;
+	}
+
+	img {
+		max-width: 50%;
+		margin: 0 auto;
+		display: block;
+		min-width: 50px;
 	}
 
 	</style>
 </head>
 <body>
-	<h1>Logo maybe?</h1>
+	<img src="img/logo.svg">
 
 	<h1>Privacy Policy —</h1>
 
-	<p>When you open the app for the first time, it generates a unique ID for your (looks like this <span>e07682f6-a87f-4cc3-8ddb-c5eaabf16dcb</span>). This Id gets attached to all the poems that you submit. The ID is the only personal information that is collected.</p>
+	<p>When you open the app for the first time, it generates <span class="tip" data-tippy-content="Example: e07682f6-a87f-4cc3-8ddb-c5eaabf16dcb">a unique ID</span> for you. This ID gets attached to all the poems that you submit and is the only personal information that is collected.</p>
 	<p>The app communicates with my server to submit poems and retrieve new daily themes. This generates the following data:</p>
 		<ul>
-			<li>Masked IP-Address, <span></span></li>
-			<li>Path, <span>&rarr; poems/api/date/2020-02-12</span></li>
-			<li>Date and Time, <span>2020/02/12 14:23:06</span></li>
-			<li>User-Agent, <span>Dart/2.8 (dart:io)</span></li>
+			<li><span class="tip right" data-tippy-content="178.197.0.0">Masked IP-Address</span></li>
+			<li><span class="tip right" data-tippy-content="poems/api/date/2020-02-12">Path</span></li>
+			<li> <span class="tip right" data-tippy-content="11/Feb/2020:15:24:42 +0000">Date and Time</span></li>
+			<li><span class="tip right" data-tippy-content="Dart/2.8 (dart:io)">User-Agent</span></li>
 		</ul>
 	<p>
 	I use this data to asses the status of the server. It will be deleted after 90 days.
@@ -107,5 +120,16 @@
 
 	<p>If you have any questions or would like all your data removed please write me poems@tofu.wtf</p>
 
+	<script src="https://unpkg.com/popper.js@1"></script>
+	<script src="https://unpkg.com/tippy.js@5/dist/tippy-bundle.iife.js"></script>
+	<script type="text/javascript">
+		window.addEventListener('DOMContentLoaded', (event) => {
+    		tippy('span.tip:not(.right)');
+    		tippy('span.tip.right', {
+    			"placement": "right",
+    			"distance": 15
+    		});
+		});
+	</script>
 </body>
 </html>

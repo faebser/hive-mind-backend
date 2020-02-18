@@ -48,3 +48,6 @@ stop:
 
 start:
 	ssh elixir-prod@tofu.wtf ./deploy/hive_backend/bin/hive_backend start
+
+static: $(shell find html -type f)
+	scp -r html/* root@tofu.wtf:/var/www/poems
