@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Poetic Hivemind</title>
+	<style type="text/css">
+	
+	@font-face {
+	    font-family: 'space_groteskmedium';
+	    src: url('fonts/spacegrotesk-medium-webfont.woff2') format('woff2'),
+	         url('fonts/spacegrotesk-medium-webfont.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+
+	}
+
+	@font-face {
+	    font-family: 'cormorant_garamondmedium';
+	    src: url('fonts/cormorantgaramond-medium-webfont.woff2') format('woff2'),
+	         url('fonts/cormorantgaramond-medium-webfont.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+
+	}
+
+	html {
+	  box-sizing: border-box;
+	}
+	*, *:before, *:after {
+	  box-sizing: inherit;
+	}
+
+	:root {
+	  --ratio: 1.5;
+	  --s-5: calc(var(--s-4) / var(--ratio));
+	  --s-4: calc(var(--s-3) / var(--ratio));
+	  --s-3: calc(var(--s-2) / var(--ratio));
+	  --s-2: calc(var(--s-1) / var(--ratio));
+	  --s-1: calc(var(--s0) / var(--ratio));
+	  --s0: 1rem;
+	  --s1: calc(var(--s0) * var(--ratio));
+	  --s2: calc(var(--s1) * var(--ratio));
+	  --s3: calc(var(--s2) * var(--ratio));
+	  --s4: calc(var(--s3) * var(--ratio));
+	  --s5: calc(var(--s4) * var(--ratio));
+
+	  font-size: calc(1rem + 0.5vw);
+	}
+
+	html {
+		background-color: white;
+	}
+
+	h1, p {
+		color: black;
+	}
+
+	body {
+		max-width: 60ch;
+		margin: 0 auto var(--s5) auto;
+	}
+
+	h1 {
+		font-family: 'space_groteskmedium';
+		font-size: var(--s4);
+		font-weight: normal;
+		text-transform: uppercase;
+	}
+
+	header {
+		margin: var(--s5) 0 var(--s4) 0;
+	}
+
+	header > h1 {
+		margin: 0;
+		line-height: 0.9;
+		font-feature-settings: "ss03";
+		font-feature-settings: "salt" 4;
+	}
+
+	header > h1 + h1 {
+		margin-left: 1ch;
+	}
+
+	header > h1 + h1 + h1 {
+		margin-left: 4ch;
+	}
+
+	header img {
+		height: var(--s0);
+		width: auto;
+	}
+
+	span.tip {
+		text-decoration: underline;
+		text-decoration-style: dashed;
+		cursor: help;
+	}
+
+	.tippy-tooltip {
+		font-family: 'space_groteskmedium';
+		font-size: 15px;
+		letter-spacing: 1.3px;
+		padding: 0.5rem 0.75rem;
+		font-weight: normal;
+	}
+
+	p,
+	ol li {
+		font-family: 'cormorant_garamondmedium';
+		font-size: var(--s0);
+		font-weight: normal;
+		line-height: 1.4;
+		margin: 0;
+	}
+
+	ol {
+		padding: 0;
+		list-style: none;
+  		counter-reset: my-awesome-counter;
+	}
+
+	ol li {
+		counter-increment: my-awesome-counter;
+		font-size: var(--s-1);
+	}
+
+	ol li::before {
+	  content: counter(my-awesome-counter) " ";
+	  font-weight: bold;
+	}
+
+	.stack > * + * {
+  		margin-top: 1.5rem;
+	}
+
+	.with-sidebar {
+	  overflow: hidden;
+	}
+
+	.with-sidebar > * {
+	  display: flex;
+	  flex-wrap: wrap;
+	  margin: calc(var(--s1) / 2 * -1);
+	}
+
+	.with-sidebar > * > * {
+	  margin: calc(var(--s1) / 2);
+	  flex-basis: 20ch;
+	  flex-grow: 1;
+	}
+
+	.with-sidebar > * > :first-child {
+	  flex-basis: 0;
+	  flex-grow: 999;
+	  min-width: calc(60% - var(--s1));
+	}
+
+	sup, sub {
+	  vertical-align: baseline;
+	  position: relative;
+	  top: -0.4em;
+	}
+
+	#buttons {
+		margin-top: var(--s2);
+	}
+
+	#buttons a {
+		font-size: var(--s0);
+		font-family: 'space_groteskmedium';
+		border: 2.5px solid black;
+		text-decoration: none;
+		padding: 0.5ch 1ch;
+		border-radius: calc(var(--s0) * 0.95);
+		display: inline-block;
+	}
+
+	#buttons a,
+	#buttons a:hover,
+	#buttons a:visited {
+		color: black;
+	}
+
+	</style>
+</head>
+<body>
+	<header>
+		<h1>The</h1>
+		<h1>Poetic</h1>
+		<h1>Hive</h1>
+		<h1>Mind<img src="img/logo.svg"></h1>
+		
+	</header>
+
+	<main class="stack">
+
+		<div class="with-sidebar">
+		  	<div> <!-- intermediary wrapper -->
+		  		<div class="stack">
+		    		<p>The Poetic Hivemind<sup>1</sup> is a quiet app that asks you to write a poem or text to a given theme everyday.</p>
+		    		<p>
+						Inspired by the dérive<sup>2</sup> of Guy Debord the app will give you a theme, a paragraph or two, that should inspire you to see your mundane surroundings in a different, maybe even more romantic and poetic, way.
+					</p>
+					<p>
+						The continuous occupation with texts and poems should strengthen your poetic intention. The involvement in the collective authorship of training an AI to generate poems should alleviate fears that come with expressing one self.
+					</p>
+					<p>
+						This project is part of my master thesis in the Interface Cultures program of the Arts University Linz.
+					</p>
+		    	</div>
+		    	<ol class="stack">
+			    	<li>The concept of the group or hive mind is an intelligent version of real-life superorganisms such as an ant colony or beehive. </li>
+
+			    	<li><strong>dérive:</strong> A mode of experimental behavior linked to the conditions of urban society: a technique of rapid passage through varied ambiances. The term also designates a specific uninterrupted period of dériving. <a href="https://www.cddc.vt.edu/sionline/si/theory.html">Theory of the Dérive</a>
+					</li>
+			    </ol>
+			</div>
+		</div>
+
+		<div id="buttons" class="stack">
+			<a href="https://apps.apple.com/us/app/the-poetic-hivemind/id1498430507?ls=1">Get the app from the apple app store</a>
+			<a href="https://play.google.com/store/apps/details?id=tofu.wtf.hive_poetry_mind">Get the app from google play</a>
+		</div>
+
+	</main>
+
+	
+</body>
+</html>
