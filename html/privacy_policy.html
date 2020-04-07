@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Poetic Hivemind: Privacy Policy</title>
+	<title>The Poetic Hivemind: Privacy Policy</title>
 	<style type="text/css">
 	
 	@font-face {
@@ -15,8 +15,9 @@
 
 	@font-face {
 	    font-family: 'cormorant_garamondmedium';
-	    src: url('fonts/cormorantgaramond-medium-webfont.woff2') format('woff2'),
-	         url('fonts/cormorantgaramond-medium-webfont.woff') format('woff');
+	    src: url('fonts/CormorantGaramond-Regular.otf') format('opentype'),
+	    	url('fonts/cormorantgaramond-regular-webfont.woff2') format('woff2'),
+	         url('fonts/cormorantgaramond-regular-webfont.woff') format('woff');
 	    font-weight: normal;
 	    font-style: normal;
 
@@ -29,6 +30,23 @@
 	  box-sizing: inherit;
 	}
 
+	:root {
+	  --ratio: 1.5;
+	  --s-5: calc(var(--s-4) / var(--ratio));
+	  --s-4: calc(var(--s-3) / var(--ratio));
+	  --s-3: calc(var(--s-2) / var(--ratio));
+	  --s-2: calc(var(--s-1) / var(--ratio));
+	  --s-1: calc(var(--s0) / var(--ratio));
+	  --s0: 1rem;
+	  --s1: calc(var(--s0) * var(--ratio));
+	  --s2: calc(var(--s1) * var(--ratio));
+	  --s3: calc(var(--s2) * var(--ratio));
+	  --s4: calc(var(--s3) * var(--ratio));
+	  --s5: calc(var(--s4) * var(--ratio));
+
+	  font-size: calc(1rem + 0.5vw);
+	}
+
 	html {
 		background-color: white;
 	}
@@ -38,28 +56,63 @@
 	}
 
 	body {
-		max-width: 600px;
-		margin: 0 auto;
+		max-width: 60ch;
+		margin: 0 auto var(--s5) auto;
 	}
 
 	h1,
-	h2 {
+	h2,
+	header p {
 		font-family: 'space_groteskmedium';
-		font-size: 1.8rem;
-		letter-spacing: 1.3px;
 		font-weight: normal;
-		margin: 6rem 0 2.5rem 0;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		font-size: var(--s4);
+	}
+
+	h2 {
+		font-size: var(--s1);
+	}
+
+	a,
+	a:visited {
+		color: #464646;
+	}
+
+	a:hover {
+		color: black;
+	}
+
+	header {
+		margin: var(--s5) 0 var(--s4) 0;
+	}
+
+	header h1 {
+		margin: 0 0 0 1ch;
+		line-height: 0.9;
+		font-feature-settings: "ss03";
+		font-feature-settings: "salt" 4;
+	}
+
+	header > h1 + h1 {
+		margin-left: 3ch;
+	}
+
+	header > h1 + h1 + h1 {
+		margin-left: 4ch;
+	}
+
+	header img {
+		height: var(--s0);
+		width: auto;
 	}
 
 	span.tip {
 		text-decoration: underline;
 		text-decoration-style: dashed;
 		cursor: help;
-	}
-
-	h1 + p,
-	h2 + p {
-		margin-top: 0; 
 	}
 
 	.tippy-tooltip {
@@ -71,66 +124,134 @@
 	}
 
 	p,
+	ol li,
 	ul li {
 		font-family: 'cormorant_garamondmedium';
-		letter-spacing: 1px;
-		font-size: 2.5rem;
+		font-size: var(--s0);
 		font-weight: normal;
-		list-style: square;
-		line-height: 1.3;
+		line-height: 1.4;
+		margin: 0;
 	}
 
-	img {
-		max-width: 50%;
-		margin: 0 auto;
-		display: block;
-		min-width: 50px;
+	ol {
+		padding: 0;
+		list-style: none;
+  		counter-reset: my-awesome-counter;
+  		font-variant-numeric: lining-nums;
+	}
+
+	ol li {
+		counter-increment: my-awesome-counter;
+		font-size: var(--s-1);
+	}
+
+	ol li::before {
+	  content: counter(my-awesome-counter) " ";
+	  font-weight: bold;
+	}
+
+	.stack > * + * {
+  		margin-top: 1.5rem;
+	}
+
+	.with-sidebar {
+	  overflow: hidden;
+	}
+
+	.with-sidebar > * {
+	  display: flex;
+	  flex-wrap: wrap;
+	  margin: calc(var(--s1) / 2 * -1);
+	}
+
+	.with-sidebar > * > * {
+	  margin: calc(var(--s1) / 2);
+	  flex-basis: 20ch;
+	  flex-grow: 1;
+	}
+
+	.with-sidebar > * > :first-child {
+	  flex-basis: 0;
+	  flex-grow: 999;
+	  min-width: calc(60% - var(--s1));
+	}
+
+	sup, sub {
+	  vertical-align: baseline;
+	  position: relative;
+	  top: -0.4em;
+	}
+
+	#buttons {
+		margin-top: var(--s2);
+	}
+
+	#buttons a {
+		font-size: var(--s0);
+		font-family: 'space_groteskmedium';
+		border: 2.5px solid black;
+		text-decoration: none;
+		padding: 0.5ch 1ch;
+		border-radius: calc(var(--s0) * 0.95);
+		display: inline-block;
+	}
+
+	#buttons a,
+	#buttons a:hover,
+	#buttons a:visited {
+		color: black;
 	}
 
 	</style>
 </head>
 <body>
-	<img src="img/logo.svg">
+	<header>
+		<p>The Poetic Hivemind:</p>
+		<h1>Privacy</h1>
+		<h1>Policy<img src="img/logo.svg"></h1>
+	</header>
 
-	<h1>Privacy Policy —</h1>
+	<main class="stack">
+		<div class="with-sidebar">
+			<div>
+				<div class="stack">
+					<p>When you open the app for the first time, it generates a unique ID<sup>1</sup> for you. This ID gets attached to all the poems that you submit and is the only personal information that is collected.</p>
+					<p>The app communicates with my server to submit poems and retrieve new daily themes. This generates the following data:</p>
+						<ul>
+							<li>Masked IP-Address<sup>2</sup> for privacy</li>
+							<li>Path sub part of the URL<sup>3</sup> of your request</li>
+							<li>Date and Time of your request<sup>4</sup></li>
+							<li>User-Agent<sup>5</sup></li>
+						</ul>
+					<p>
+					I use this data to asses the status of the server. It will be deleted after 90 days.
+					</p>
+				</div>
+				<ol class="stack">
+					<li>This is called a UUID. I use version 4. <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)">Further information on Wikipedia</a></li>
+					<li>A numerical label assigned to your device. Reduced to <strong>178.197.0.0</strong> instead of <strong>178.197.10.25</strong> . <a href="https://en.wikipedia.org/wiki/IP_address">Further information on Wikipedia</a></li>
+					<li>The full URL would be <a href="https://tofu.wtf/poems/api/date/2020-02-12">https://tofu.wtf/poems/api/date/2020-02-12</a>, the path is <a href="/poems/api/date/2020-02-12">/poems/api/date/2020-02-12</a>. <a href="https://en.wikipedia.org/wiki/URL">Further information on Wikipedia</a></li>
+					<li>11/Feb/2020:15:24:42 +0000</li>
+					<li>A string that identifies the software that was used to carry out the request. Example: Dart/2.8 (dart:io). <a href="https://en.wikipedia.org/wiki/User_agent">Further information on Wikipedia</a></li>
+				</ol>
+			</div>
+		</div>
 
-	<p>When you open the app for the first time, it generates <span class="tip" data-tippy-content="Example: e07682f6-a87f-4cc3-8ddb-c5eaabf16dcb">a unique ID</span> for you. This ID gets attached to all the poems that you submit and is the only personal information that is collected.</p>
-	<p>The app communicates with my server to submit poems and retrieve new daily themes. This generates the following data:</p>
-		<ul>
-			<li><span class="tip right" data-tippy-content="178.197.0.0">Masked IP-Address</span></li>
-			<li><span class="tip right" data-tippy-content="poems/api/date/2020-02-12">Path</span></li>
-			<li> <span class="tip right" data-tippy-content="11/Feb/2020:15:24:42 +0000">Date and Time</span></li>
-			<li><span class="tip right" data-tippy-content="Dart/2.8 (dart:io)">User-Agent</span></li>
-		</ul>
-	<p>
-	I use this data to asses the status of the server. It will be deleted after 90 days.
-	</p>
+		<h2>Usage —</h2>
 
-	<h2>Usage —</h2>
+		<p>The main purpose of the poems and IDs collected in this app is the creation of a training data set for an AI and for research. It is planned to publish the dataset at a point in the future. <br>Further uses can also include:
+			<ul>
+				<li>Exhibitions</li>
+				<li>Books</li>
+			</ul>
+		</p>
 
-	<p>The main purpose of the poems and IDs collected in this app is the creation of a training data set for an AI and for research. Further uses can also include:
-		<ul>
-			<li>Exhibitions</li>
-			<li>Books</li>
-		</ul>
-	</p>
+		<h2>Deletion —</h2>
 
-	<h2>Deletion —</h2>
+		<p>To reset your unique ID please remove the app and it's data from your phone and reinstall it. It will generate a new ID for your.</p>
 
-	<p>To reset your unique ID please remove the app and it's data from your phone and reinstall it. It will generate a new ID for your.</p>
+		<p>If you have any questions or would like all your data removed please write to me: poems@tofu.wtf</p>
 
-	<p>If you have any questions or would like all your data removed please write me poems@tofu.wtf</p>
-
-	<script src="https://unpkg.com/popper.js@1"></script>
-	<script src="https://unpkg.com/tippy.js@5/dist/tippy-bundle.iife.js"></script>
-	<script type="text/javascript">
-		window.addEventListener('DOMContentLoaded', (event) => {
-    		tippy('span.tip:not(.right)');
-    		tippy('span.tip.right', {
-    			"placement": "right",
-    			"distance": 15
-    		});
-		});
-	</script>
+	</main>
 </body>
 </html>
