@@ -5,6 +5,8 @@ SHELL := bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
+.PHONY: clean stop start attach
+
 # stuff
 APP_VSN:=$(shell grep 'version:' mix.exs | cut -d '"' -f2)
 APP_NAME:=$(shell grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g')
@@ -48,6 +50,9 @@ stop:
 
 start:
 	ssh elixir-prod@tofu.wtf ./deploy/hive_backend/bin/hive_backend start
+
+attach:
+	ssh elixir-prod@tofu.wtf ./deploy/hive_backend/bin/hive_backend attach
 
 static: $(shell find html -type f)
 	scp -r html/* root@tofu.wtf:/var/www/poems
