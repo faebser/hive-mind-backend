@@ -6,7 +6,10 @@ defmodule HiveBackendWeb.ThemeView do
   	alias HiveBackend.Repo
 
   	def get_date_of_last_theme do
-  		Theme |> last(:date_for) |> Repo.one |> Map.get(:date_for)
-  		#t.date_for
+  		Theme 
+  		|> last(:date_for)
+  		|> Repo.one 
+  		|> Map.get(:date_for)
+  		|> Date.add(1)
   	end
 end
