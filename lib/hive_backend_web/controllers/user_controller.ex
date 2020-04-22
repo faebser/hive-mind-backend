@@ -89,4 +89,10 @@ defmodule HiveBackendWeb.UserController do
         end
     end
   end
+
+  def from_poem_to_user(poem_id) do
+    p = Poem |> Repo.get(poem_id)
+
+    User |> Repo.get(p.user_id)
+  end
 end
