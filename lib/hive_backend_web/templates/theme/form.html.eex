@@ -5,12 +5,13 @@
     </div>
   <% end %>
 
+
   <%= label f, :content %>
   <%= textarea f, :content %>
   <%= error_tag f, :content %>
 
   <%= label f, :date_for %>
-  <%= date_select f, :date_for %>
+  <%= date_select f, :date_for, default: get_date_of_last_theme() %>
   <%= error_tag f, :date_for %>
 
   <%= label f, :deleted %>
