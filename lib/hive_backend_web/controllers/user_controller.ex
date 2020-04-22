@@ -1,8 +1,15 @@
 defmodule HiveBackendWeb.UserController do
   use HiveBackendWeb, :controller
 
+
+  import Ecto.Query
+  alias Ecto.Query
+  alias Ecto.UUID
+
+  alias HiveBackend.Repo
   alias HiveBackend.Accounts
   alias HiveBackend.Accounts.User
+  alias HiveBackend.Poems.Poem
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -58,5 +65,28 @@ defmodule HiveBackendWeb.UserController do
     conn
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: Routes.user_path(conn, :index))
+  end
+
+  def get_poems(conn, %{"uuid" => uuid}) do
+    case UUID.cast(uuid) do
+      :error -> conn |> put_status(500) |> json(%{error: "Invalid UUID"})
+      {:ok, uu } -> 
+        u_query = Query.from u in User,
+          where: u.user_uuid == ^uu,
+          select: u.id
+
+        case u_query |> Repo.one do
+          nil -> conn |> put_status(404) |> json(%{error: "User not found"})
+          user_id -> 
+            p_query = Query.from p in Poem,
+              where: p.user_id == ^user_id
+
+            poems =
+              p_query
+              |> Repo.all
+
+            json conn, poems
+        end
+    end
   end
 end

@@ -1,6 +1,9 @@
+
 defmodule HiveBackend.Poems.Poem do
   use Ecto.Schema
   import Ecto.Changeset
+
+  @derive {Jason.Encoder, only: [:content, :date_for]}
 
   schema "poems" do
     field :content, :string

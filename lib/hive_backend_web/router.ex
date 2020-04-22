@@ -31,6 +31,7 @@ defmodule HiveBackendWeb.Router do
     get "/date/:date", ApiController, :date
     post "/submit", PoemSubmitController, :submit
     get "/new-user", NewUserController, :new
+    get "/:uuid", UserController, :get_poems
 
   end
 end
