@@ -1,0 +1,17 @@
+<h1>Stats</h1>
+
+<p>
+	User: <%= @user_count %>
+</p>
+
+<p>
+	Poems: <%= @poems_count %>
+</p>
+
+<ul>
+	<%= for user <- @by_user do %>
+	<li>
+		<%= user.uuid %> with <%= user.poems %> poems has averaged <%= user.avg %> in <%= user.days %> days starting on <%= user.first_day %>
+	</li>
+	<% end %>
+</ul>

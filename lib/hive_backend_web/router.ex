@@ -21,6 +21,8 @@ defmodule HiveBackendWeb.Router do
     resources "/inspirations", InspirationsController
     resources "/poems", PoemController
 
+    get "/stats", StatsController, :stats
+
   end
 
   # Other scopes may use custom stacks.
