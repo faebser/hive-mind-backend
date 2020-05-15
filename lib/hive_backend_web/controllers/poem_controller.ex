@@ -59,4 +59,8 @@ defmodule HiveBackendWeb.PoemController do
     |> put_flash(:info, "Poem deleted successfully.")
     |> redirect(to: Routes.poem_path(conn, :index))
   end
+
+  def random(conn, _params) do
+    json conn, Poems.get_random_poem
+  end
 end
