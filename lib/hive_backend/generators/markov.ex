@@ -1,5 +1,7 @@
 defmodule HiveBackend.Generators.Markov do
 
+	alias HiveBackend.Poems
+
 	# add punctuation (, . 's)
 	# add start and end
 
@@ -30,6 +32,13 @@ defmodule HiveBackend.Generators.Markov do
 	end
 
 	def start_link, do: Agent.start_link(fn -> %{} end) # create map for sharing through agent
+
+	def load_all_poems(pid) do
+		Poems.list_poems
+		|> Enum.each(fn p -> add_poem(pid, p.content) end)
+
+		pid
+	end
 
 	# map in agent
 	# keys are words
@@ -108,6 +117,7 @@ defmodule HiveBackend.Generators.Markov do
 		# replaces token while also removing additional white space
 		poem
 		|> String.replace( @newline <> " ", "\n")
+		|> String.replace( @newline, "\n")
 	end
 
 	def trim_capitalize(poem) do

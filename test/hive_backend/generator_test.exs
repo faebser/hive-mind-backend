@@ -29,6 +29,12 @@ defmodule HiveBackend.GeneratorTests do
 				]
 		end
 
+		test "faulty newline at the end" do
+			p = "A poem is a poem is the only thing <NEWLINE> is a poem is a poem is a poem is the only thing <NEWLINE>"
+			p2 =  p |> Markov.tokens_replace |> Markov.trim_capitalize 
+			assert p2 == "A poem is a poem is the only thing \nis a poem is a poem is a poem is the only thing"
+		end
+
 		test "prepare model" do
 			map = Markov.prepare_model [ Markov.start ,"bla", Markov.newline, "bla", Markov.finish ]
 
