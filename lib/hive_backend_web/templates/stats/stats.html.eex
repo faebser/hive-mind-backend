@@ -10,6 +10,16 @@
 
 <p>A total of <%= @poems_count %>, on average <%= @by_day_avg %> per day</p>
 
+<h2>Active in the last seven days</h2>
+
+<ul>
+	<%= for user <- @last_7_days_user do %>
+	<li>
+		<%= user.user_uuid %>
+	</li>
+	<% end %>
+</ul>
+
 <ul>
 	<%= for user <- @by_user do %>
 	<li>

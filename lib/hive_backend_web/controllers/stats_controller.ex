@@ -9,7 +9,6 @@ defmodule HiveBackendWeb.StatsController do
 
   alias HiveBackend.Accounts.User
 
-  # show user that were active in the last days
   # add d3 graphs
 
 
@@ -65,13 +64,18 @@ defmodule HiveBackendWeb.StatsController do
 
 
   def stats(conn, _params) do
-    # generate one day since first poem with the amount
-    # for each user calculate average poems per day since first poem
 
+    seven_days = ~D[2000-01-03] #Date.add( Date.utc_today, -7)
     users = User |> Repo.all
     poems_with_errors = Poem |> Repo.all( order_by: [ asc: :date_for ] )
     poems = from( Poem, distinct: :content, order_by: [ asc: :date_for ] ) |> Repo.all
     by_day = @per_day_query |> Repo.all
+
+    last_7_days = Repo.all from p in Poem, distinct: p.content, where: p.date_for > ^seven_days, select: p.user_id
+    last_7_days_user_ids = last_7_days |> MapSet.new |> Enum.into([])
+    last_7_days_user = Repo.all from u in User, where: u.id in ^last_7_days_user_ids
+
+    IO.inspect(last_7_days_user)
 
     by_day_avg = length( poems ) / length( by_day )
 
@@ -118,56 +122,8 @@ defmodule HiveBackendWeb.StatsController do
       by_user: by_user,
       by_day: by_day,
       by_day_avg: by_day_avg,
-      by_day_detail: by_day_detail
+      by_day_detail: by_day_detail,
+      last_7_days_user: last_7_days_user
       })
-  end
-
-  def today(con, _params) do
-
-  	t = Theme |> Repo.get_by(date_for: Date.utc_today)
-  	
-  	j = case t do
-  		nil -> %TodayRequest{theme_content: "not found", date_for: nil, theme_id: nil } # TODO return a 404 not found
-  		_ ->  %TodayRequest{theme_content: t.content, date_for: t.date_for, theme_id: t.id}
-  	end
-
-  	# # send to riemann
-  	# Riemannx.send_async [
-  	# 	service: "today request",
-  	# 	metric: System.monotonic_time - start,
-  	# 	description: "request duration"
-  	# ]
-
-  	# return something here
-  	json con, j
-  end
-
-  def date(con, %{"date" => date}) do
-  	split = String.split(date, "-")
-
-  	{year, split} = List.pop_at(split, 0)
-  	{month, split} = List.pop_at(split, 0)
-  	{day, split} = List.pop_at(split, 0)
-
-  	year = String.to_integer(year)
-  	month = String.to_integer(month)
-  	day = String.to_integer(day)
-
-  	d = case Date.new(year, month, day) do
-  		{:ok, dd} -> dd
-  		{:error, reason} ->
-  			con
-  			|> put_status(500)
-  			|> json(%{error: reason})
-  	end
-
-  	t = Theme |> Repo.get_by(date_for: d)
-
-  	j = case t do
-  		nil -> %TodayRequest{theme_content: "not found", date_for: nil, theme_id: nil}
-  		_ -> %TodayRequest{theme_content: t.content, date_for: t.date_for, theme_id: t.id}
-  	end
-
-  	json con, j
   end
 end
