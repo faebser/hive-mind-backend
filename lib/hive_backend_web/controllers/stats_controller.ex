@@ -9,8 +9,25 @@ defmodule HiveBackendWeb.StatsController do
 
   alias HiveBackend.Accounts.User
 
-  def preload_user( query ) do
-     from q in query, preload: :poems
+  # show user that were active in the last days
+  # add d3 graphs
+
+
+  @per_day_query from p in Poem, group_by: p.date_for, select: {p.date_for, count(p.id)}, order_by: [ asc: p.date_for ]
+
+  def get_day_map( poem ) do
+    %{
+      :date_string => '',
+      :date_for => poem.date_for,
+      :insert_datetimes => [ poem.inserted_at ],
+      :sum => 1
+    }
+  end
+
+  def update_day_map( day_map, poem ) do
+    %{ :insert_datetimes => i_dt, :sum => s} = day_map
+
+    %{ day_map | :sum => s + 1, :insert_datetimes => [ poem.inserted_at | i_dt]}
   end
 
   def get_user_map( uuid ) do
@@ -52,17 +69,18 @@ defmodule HiveBackendWeb.StatsController do
     # for each user calculate average poems per day since first poem
 
     users = User |> Repo.all
-    poems = Poem |> Repo.all(order_by: [ asc: :date_for ])
+    poems_with_errors = Poem |> Repo.all( order_by: [ asc: :date_for ] )
+    poems = from( Poem, distinct: :content, order_by: [ asc: :date_for ] ) |> Repo.all
+    by_day = @per_day_query |> Repo.all
+
+    by_day_avg = length( poems ) / length( by_day )
 
     user_id_to_uuid = 
     Enum.map( users, fn user -> { user.id, user.user_uuid } end )
     |> Enum.into( %{} )
 
-    IO.inspect( user_id_to_uuid )
-
     # key is user_id, 
     by_user = Enum.reduce(poems, %{}, fn item, acc ->
-
       id = item.user_id
 
       acc = case acc do
@@ -77,13 +95,30 @@ defmodule HiveBackendWeb.StatsController do
     |> Enum.into( [], fn {k, v} -> v end )
     |> Enum.sort( fn a, b -> a.poems >= b.poems end)
 
-    IO.inspect( by_user )
+    { _, last, by_day_detail } = poems
+    |> Enum.reduce({ ~D[1970-01-01], %{}, [] }, fn item, { current_date, current, acc } -> 
+        case current_date != item.date_for do
+           false -> # same day
+            { current_date, update_day_map( current, item ), acc }
+           true -> # different day
+            if current != %{} do
+              { item.date_for, get_day_map( item ), [ current | acc ] }
+            else
+              { item.date_for, get_day_map( item ), acc }
+            end
+        end
+      end)
 
+    by_day_detail = [ last | by_day_detail ]
 
     render(conn, "stats.html", %{ 
-      poems_count: length(poems), 
+      poems_count: length(poems),
+      duplicate_poems: length(poems_with_errors), 
       user_count: length(users),
-      by_user: by_user
+      by_user: by_user,
+      by_day: by_day,
+      by_day_avg: by_day_avg,
+      by_day_detail: by_day_detail
       })
   end
 

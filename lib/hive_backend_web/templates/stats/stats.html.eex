@@ -5,13 +5,31 @@
 </p>
 
 <p>
-	Poems: <%= @poems_count %>
+	Poems: <%= @poems_count %>, with duplicates: <%= @duplicate_poems %>
 </p>
+
+<p>A total of <%= @poems_count %>, on average <%= @by_day_avg %> per day</p>
 
 <ul>
 	<%= for user <- @by_user do %>
 	<li>
 		<%= user.uuid %> with <%= user.poems %> poems has averaged <%= user.avg %> in <%= user.days %> days starting on <%= user.first_day %>
+	</li>
+	<% end %>
+</ul>
+
+<ul>
+	<%= for { day, count } <- @by_day do %>
+	<li>
+		On <%= day %> were <%= count %> poems written
+	</li>
+	<% end %>
+</ul>
+
+<ul>
+	<%= for day <- @by_day_detail do %>
+	<li>
+		On <%= day.date_for %> were <%= day.sum %> poems written
 	</li>
 	<% end %>
 </ul>
