@@ -34,7 +34,7 @@ defmodule HiveBackend.Generators.Markov do
 	def start_link, do: Agent.start_link(fn -> %{} end) # create map for sharing through agent
 
 	def load_all_poems(pid) do
-		Poems.list_poems
+		Poems.get_distinct_poems
 		|> Enum.each(fn p -> add_poem(pid, p.content) end)
 
 		pid
@@ -54,6 +54,9 @@ defmodule HiveBackend.Generators.Markov do
 	# use reduce to do that
 	# use map.merge/3
 	# extend list on conflict
+
+	# build with more then period of one
+	# Use Enum.split
 
 	def prepare_model(tokens) do
 		{ _, map } 

@@ -6,6 +6,7 @@ defmodule HiveBackendWeb.StatsController do
   alias HiveBackend.TodayRequest
   alias HiveBackend.Poems.Theme
   alias HiveBackend.Poems.Poem
+  alias HiveBackend.Poems
 
   alias HiveBackend.Accounts.User
 
@@ -65,17 +66,15 @@ defmodule HiveBackendWeb.StatsController do
 
   def stats(conn, _params) do
 
-    seven_days = ~D[2000-01-03] #Date.add( Date.utc_today, -7)
+    seven_days = Date.add( Date.utc_today, -7)
     users = User |> Repo.all
     poems_with_errors = Poem |> Repo.all( order_by: [ asc: :date_for ] )
-    poems = from( Poem, distinct: :content, order_by: [ asc: :date_for ] ) |> Repo.all
+    poems = Poems.get_distinct_poems
     by_day = @per_day_query |> Repo.all
 
     last_7_days = Repo.all from p in Poem, distinct: p.content, where: p.date_for > ^seven_days, select: p.user_id
     last_7_days_user_ids = last_7_days |> MapSet.new |> Enum.into([])
     last_7_days_user = Repo.all from u in User, where: u.id in ^last_7_days_user_ids
-
-    IO.inspect(last_7_days_user)
 
     by_day_avg = length( poems ) / length( by_day )
 

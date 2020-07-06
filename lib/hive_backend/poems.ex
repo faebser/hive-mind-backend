@@ -232,18 +232,14 @@ defmodule HiveBackend.Poems do
     @doc """
   Gets a single random poem.
 
-  ## Examples
-
-      iex> get_poem!(123)
-      %Poem{}
-
-      iex> get_poem!(456)
-      ** (Ecto.NoResultsError)
-
   """
   def get_random_poem() do
     q = from Poem, order_by: fragment("RANDOM()"), limit: 1
     q |> Repo.one()
+  end
+
+  def get_distinct_poems() do
+   from( Poem, distinct: :content, order_by: [ asc: :date_for ] ) |> Repo.all
   end
 
   @doc """

@@ -1,4 +1,4 @@
-defmodule HiveBackend.GeneratorTests do
+defmodule HiveBackend.GeneratorTests.Markov do
 	use HiveBackend.DataCase
 
 	alias HiveBackend.Generators.Markov
