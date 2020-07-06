@@ -89,7 +89,7 @@ defmodule HiveBackend.Generators.Markov do
 	def generate(pid) do
 		state = Agent.get(pid, fn state -> state end)
 
-		r_generate @start, state, "", 0
+		r_generate @start, state, [] , 0
 	end
 
 	# recursive function
@@ -98,7 +98,7 @@ defmodule HiveBackend.Generators.Markov do
 
 	# base case
 	def r_generate(@finish, state, poem, size) do
-		poem
+		Enum.reverse poem
 	end
 
 	# start case
@@ -111,16 +111,26 @@ defmodule HiveBackend.Generators.Markov do
 	# normal case
 	def r_generate(current_token, state, poem, size) do
 		next_token = Enum.random state[ current_token ]
-		poem = poem <> " " <> current_token
+		poem = [ current_token | poem ]
 
 		r_generate next_token, state, poem, size + 1
 	end
 
 	def tokens_replace(poem) do
 		# replaces token while also removing additional white space
-		poem
-		|> String.replace( @newline <> " ", "\n")
-		|> String.replace( @newline, "\n")
+		Enum.reduce(poem, "", fn item, acc ->
+			acc = 
+			cond do
+				is_comma_period?(item) -> acc <> item
+				is_newline?(item) -> acc <> "\n"
+				true -> acc <> " " <> item
+			end
+			acc
+		end)
+
+		# poem
+		# |> String.replace( @newline <> " ", "\n")
+		# |> String.replace( @newline, "\n")
 	end
 
 	def trim_capitalize(poem) do
@@ -128,4 +138,13 @@ defmodule HiveBackend.Generators.Markov do
 		|> String.trim
 		|> String.capitalize
 	end
+
+	def is_comma_period?(item) do
+		item == "," || item == "."
+	end
+
+	def is_newline?(item) do
+		item == @newline
+	end
+
 end

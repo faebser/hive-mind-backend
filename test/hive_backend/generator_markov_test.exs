@@ -30,8 +30,8 @@ defmodule HiveBackend.GeneratorTests.Markov do
 		end
 
 		test "faulty newline at the end" do
-			p = "A poem is a poem is the only thing <NEWLINE> is a poem is a poem is a poem is the only thing <NEWLINE>"
-			p2 =  p |> Markov.tokens_replace |> Markov.trim_capitalize 
+			p = "A poem is a poem is the only thing \nis a poem is a poem is a poem is the only thing \n"
+			p2 =  p |> Markov.trim_capitalize 
 			assert p2 == "A poem is a poem is the only thing \nis a poem is a poem is a poem is the only thing"
 		end
 
@@ -95,9 +95,9 @@ defmodule HiveBackend.GeneratorTests.Markov do
 
 			poem = Markov.generate(pid)
 
-			assert String.contains?(poem, Markov.start) == false
-			assert String.contains?(poem, Markov.finish) == false
-			assert String.contains?(poem, "bla")
+			assert Enum.member?(poem, Markov.start) == false
+			assert Enum.member?(poem, Markov.finish) == false
+			assert Enum.member?(poem, "bla")
 		end
 
 		test "replace tokens in poem" do
@@ -105,6 +105,8 @@ defmodule HiveBackend.GeneratorTests.Markov do
 			Markov.add_poem pid, "BLA\nBLA"
 
 			poem = Markov.generate(pid) |> Markov.tokens_replace
+
+			IO.inspect(poem)
 
 			assert String.contains?(poem, Markov.start) == false
 			assert String.contains?(poem, Markov.finish) == false
