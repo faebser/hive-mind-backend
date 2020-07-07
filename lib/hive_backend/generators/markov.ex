@@ -123,6 +123,7 @@ defmodule HiveBackend.Generators.Markov do
 			cond do
 				is_comma_period?(item) -> String.slice(acc, 0..-2) <> item
 				is_newline?(item) -> String.slice(acc, 0..-2) <> "\n"
+				is_personal_i?(item) -> acc <> "I "
 				true -> acc <> item <> " " 
 			end
 			acc
@@ -134,17 +135,27 @@ defmodule HiveBackend.Generators.Markov do
 	end
 
 	def trim_capitalize(poem) do
+		p = 
 		poem
 		|> String.trim
+		
+		s =
+		p
+		|> String.first
 		|> String.capitalize
+
+		s <> String.slice(p, 1..-1)
 	end
 
 	def is_comma_period?(item) do
-		Enum.member?([ ",", ".", "!"], item)
+		Enum.member?([ ",", ".", "!", "'"], item)
 	end
 
 	def is_newline?(item) do
 		item == @newline
 	end
 
+	def is_personal_i?(item) do
+		item == "i"
+	end
 end

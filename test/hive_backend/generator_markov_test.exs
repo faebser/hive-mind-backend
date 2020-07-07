@@ -148,5 +148,17 @@ defmodule HiveBackend.GeneratorTests.Markov do
 
 			assert p2 == "Not present in the table\nso blatant!"
 		end
+
+		test "Fixing personal I" do
+			p = ["I", "think", "how", "can", "help", "you", "nine wise", "<NEWLINE>", "i",
+			"want", "to", "read", "is", "impossible", "to", "my", "dreams", "."]
+
+			p2 =
+			p
+			|> Markov.tokens_replace
+			|> Markov.trim_capitalize
+
+			assert p2 == "I think how can help you nine wise\nI want to read is impossible to my dreams."
+		end
 	end
 end
