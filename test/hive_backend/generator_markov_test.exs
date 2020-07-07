@@ -106,8 +106,6 @@ defmodule HiveBackend.GeneratorTests.Markov do
 
 			poem = Markov.generate(pid) |> Markov.tokens_replace
 
-			IO.inspect(poem)
-
 			assert String.contains?(poem, Markov.start) == false
 			assert String.contains?(poem, Markov.finish) == false
 			assert String.contains?(poem, Markov.newline) == false
@@ -138,6 +136,17 @@ defmodule HiveBackend.GeneratorTests.Markov do
 			assert String.contains?(poem, Markov.finish) == false
 			assert String.contains?(poem, Markov.newline) == false
 			assert String.starts_with?(poem, "B")
+		end
+
+		test "fixing newline spaces" do
+			p = ["not", "present", "in","the", "table", "<NEWLINE>", "so", "blatant", "!"]
+
+			p2 =
+			p
+			|> Markov.tokens_replace
+			|> Markov.trim_capitalize
+
+			assert p2 == "Not present in the table\nso blatant!"
 		end
 	end
 end
