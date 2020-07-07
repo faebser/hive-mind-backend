@@ -121,7 +121,8 @@ defmodule HiveBackend.Generators.Markov do
 		Enum.reduce(poem, "", fn item, acc ->
 			acc = 
 			cond do
-				is_comma_period?(item) -> String.slice(acc, 0..-2) <> item
+				is_apostrophe?(item) -> String.slice(acc, 0..-2) <> item
+				is_comma_period?(item) -> String.slice(acc, 0..-2) <> item <> " "
 				is_newline?(item) -> String.slice(acc, 0..-2) <> "\n"
 				is_personal_i?(item) -> acc <> "I "
 				true -> acc <> item <> " " 
@@ -148,7 +149,11 @@ defmodule HiveBackend.Generators.Markov do
 	end
 
 	def is_comma_period?(item) do
-		Enum.member?([ ",", ".", "!", "'"], item)
+		Enum.member?([ ",", ".", "!"], item)
+	end
+
+	def is_apostrophe?(item) do
+		item == "'"
 	end
 
 	def is_newline?(item) do
