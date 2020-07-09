@@ -1,0 +1,30 @@
+<h1>Listing Generated poems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Status</th>
+      <th>From</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for generated__poem <- @generated_poems do %>
+    <tr>
+      <td><%= generated__poem.content %></td>
+      <td><%= generated__poem.status %></td>
+      <td><%= generated__poem.from %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.generated__poem_path(@conn, :show, generated__poem) %></span>
+        <span><%= link "Edit", to: Routes.generated__poem_path(@conn, :edit, generated__poem) %></span>
+        <span><%= link "Delete", to: Routes.generated__poem_path(@conn, :delete, generated__poem), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Generated  poem", to: Routes.generated__poem_path(@conn, :new) %></span>

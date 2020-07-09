@@ -1,0 +1,23 @@
+<h1>Show Generated  poem</h1>
+
+<ul>
+
+  <li>
+    <strong>Content:</strong>
+    <%= @generated__poem.content %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @generated__poem.status %>
+  </li>
+
+  <li>
+    <strong>From:</strong>
+    <%= @generated__poem.from %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.generated__poem_path(@conn, :edit, @generated__poem) %></span>
+<span><%= link "Back", to: Routes.generated__poem_path(@conn, :index) %></span>

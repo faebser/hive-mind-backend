@@ -1,0 +1,5 @@
+<h1>Edit Generated  poem</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.generated__poem_path(@conn, :update, @generated__poem)) %>
+
+<span><%= link "Back", to: Routes.generated__poem_path(@conn, :index) %></span>

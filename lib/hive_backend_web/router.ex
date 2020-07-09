@@ -20,6 +20,7 @@ defmodule HiveBackendWeb.Router do
     resources "/themes", ThemeController
     resources "/inspirations", InspirationsController
     resources "/poems", PoemController
+    resources "/generated_poems", Generated_PoemController
 
     get "/stats", StatsController, :stats
 
