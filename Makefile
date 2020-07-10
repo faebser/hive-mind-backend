@@ -5,7 +5,7 @@ SHELL := bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
-.PHONY: clean stop start attach
+.PHONY: clean stop start attach migrate
 
 # stuff
 APP_VSN:=$(shell grep 'version:' mix.exs | cut -d '"' -f2)
@@ -53,6 +53,9 @@ start:
 
 attach:
 	ssh elixir-prod@tofu.wtf ./deploy/hive_backend/bin/hive_backend attach
+
+migrate:
+	ssh elixir-prod@tofu.wtf ./deploy/hive_backend/bin/hive_backend migrate
 
 static: $(shell find html -type f)
 	scp -r html/* root@tofu.wtf:/var/www/poems
