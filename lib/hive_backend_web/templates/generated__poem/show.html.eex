@@ -4,8 +4,7 @@
 
   <li>
     <strong>Content:</strong>
-    <%= @generated__poem.content %>
-    <%= @content %>
+    <p><%= linebreaks(@content) %></p>
   </li>
 
   <li>
@@ -17,7 +16,26 @@
     <strong>From:</strong>
     <%= @generated__poem.from %>
   </li>
+</ul>
 
+<h2>Legend</h2>
+<ul>
+  <li>
+    <strong>Status:</strong>
+    <ul>
+      <li>0: not reviewed</li>
+      <li>1: accepted</li>
+      <li>2: refused</li>
+    </ul>
+  </li>
+  <li>
+    <strong>From:</strong>
+    <ul>
+      <li>1: Markov</li>
+      <li>2: Queneau</li>
+      <li>3: Thesaurus</li>
+    </ul>
+  </li>
 </ul>
 
 <span><%= link "Edit", to: Routes.generated__poem_path(@conn, :edit, @generated__poem) %></span>
