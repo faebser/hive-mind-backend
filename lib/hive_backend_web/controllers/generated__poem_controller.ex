@@ -5,7 +5,11 @@ defmodule HiveBackendWeb.Generated_PoemController do
   alias HiveBackend.Generators.Generated_Poem
 
   def index(conn, _params) do
-    generated_poems = Generators.list_generated_poems()
+    generated_poems = 
+    Generators.list_generated_poems()
+    |> Enum.map( fn p ->
+      %{ p | :content => String.split( p.content, "\n" ) }
+    end)
     render(conn, "index.html", generated_poems: generated_poems)
   end
 
@@ -28,7 +32,10 @@ defmodule HiveBackendWeb.Generated_PoemController do
 
   def show(conn, %{"id" => id}) do
     generated__poem = Generators.get_generated__poem!(id)
-    render(conn, "show.html", generated__poem: generated__poem)
+
+    content = generated__poem.content |> String.split("\n")
+
+    render(conn, "show.html", generated__poem: generated__poem, content: content)
   end
 
   def edit(conn, %{"id" => id}) do

@@ -13,7 +13,7 @@
   <tbody>
 <%= for generated__poem <- @generated_poems do %>
     <tr>
-      <td><%= generated__poem.content %></td>
+      <td><%= linebreaks(generated__poem.content) %></td>
       <td><%= generated__poem.status %></td>
       <td><%= generated__poem.from %></td>
 

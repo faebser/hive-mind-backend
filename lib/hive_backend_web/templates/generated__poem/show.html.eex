@@ -5,6 +5,7 @@
   <li>
     <strong>Content:</strong>
     <%= @generated__poem.content %>
+    <%= @content %>
   </li>
 
   <li>

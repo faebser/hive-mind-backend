@@ -121,7 +121,7 @@ defmodule HiveBackend.Generators do
     Markov.load_all_poems pid
 
     0..amount
-    |> Enum.map(  fn _i ->
+    |> Enum.map( fn _i ->
 
       %Generated_Poem{
         content: Markov.get( pid ),
@@ -131,4 +131,6 @@ defmodule HiveBackend.Generators do
 
     end)
   end
+
+
 end
