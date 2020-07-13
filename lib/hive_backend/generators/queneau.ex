@@ -1,6 +1,7 @@
 defmodule HiveBackend.Generators.Queneau do
 
 	alias HiveBackend.Poems
+	alias HiveBackend.Generators.Markov
 
 	# get all poems
 	# split by lines
@@ -38,6 +39,7 @@ defmodule HiveBackend.Generators.Queneau do
 		poems_lines
 		|> r_generate( 0, max_size, [] , [])
 		|> Enum.join( "\n" )
+		|> Markov.trim_capitalize
 
 		result
 	end
