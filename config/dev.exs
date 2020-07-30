@@ -10,7 +10,7 @@ use Mix.Config
 config :hive_backend, HiveBackendWeb.Endpoint,
   http: [port: 8083],
   debug_errors: true,
-  code_reloader: false,
+  code_reloader: true,
   check_origin: false,
   watchers: []
 
@@ -47,6 +47,11 @@ config :hive_backend, HiveBackendWeb.Endpoint,
       ~r"lib/hive_backend_web/{live,views}/.*(ex)$",
       ~r"lib/hive_backend_web/templates/.*(eex)$"
     ]
+  ],
+  watchers: [
+    yarn: [
+      "watch"
+    ]
   ]
 
 # Do not include metadata nor timestamps in development logs
@@ -66,6 +71,8 @@ config :hive_backend, HiveBackend.Repo,
   database: "hive_backend_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :hive_backend, thesaurus_key: "dev"
 
 
 # config :riemannx, [

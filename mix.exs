@@ -43,7 +43,8 @@ defmodule HiveBackend.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       #{:riemannx, "~> 4.0"},
-      {:distillery, "~> 2.0", warn_missing: false}
+      {:tesla, "~> 1.3"},
+      {:hackney, "~> 1.16"}
     ]
   end
 

@@ -115,6 +115,10 @@ defmodule HiveBackend.Generators do
     Generated_Poem.changeset(generated__poem, %{})
   end
 
+  def insert( poems ) do
+    Enum.map( poems, fn p ->  Repo.insert p end)
+  end
+
   def generate_from_markov( amount ) do
 
     { :ok, pid } = Markov.start_link
