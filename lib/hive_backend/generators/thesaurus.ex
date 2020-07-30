@@ -74,13 +74,17 @@ defmodule HiveBackend.Generators.Thesaurus do
 		{ :error, "no result" }
 	end
 
-	def get_syn_from_response( response_body ) do
+	def get_syn_from_response( response_body ) when is_list(response_body) do
 		case hd( response_body ) do
 			 %{ "meta" => meta } -> 
 			 	%{ "syns" => syns } = meta
 			 	{ :ok, syns }
 			 _ -> { :error, "no meta" }
 		end
+	end
+
+	def get_syn_from_response( response_body ) do
+		{ :error, response_body }
 	end
 
 	def unpack_syns( { :ok, syns } ) do

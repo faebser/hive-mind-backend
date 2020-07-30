@@ -9,9 +9,12 @@ defmodule HiveBackend.Generators do
   alias HiveBackend.Generators.Generated_Poem
   alias HiveBackend.Generators.Markov
   alias HiveBackend.Generators.Queneau
+  alias HiveBackend.Generators.Thesaurus
+  alias HiveBackend.Poems
 
   @by_markov 1
   @by_queneau 2
+  @by_thesaurus 3
 
   def by_markov do
     @by_markov
@@ -127,12 +130,34 @@ defmodule HiveBackend.Generators do
     0..amount
     |> Enum.map( fn _i ->
 
-      %Generated_Poem{
+      { :ok, %Generated_Poem{
         content: Markov.get( pid ),
         from: @by_markov,
         status: 0
-      }
+      } }
 
+    end)
+  end
+
+  def generate_from_thesaurus( amount ) do
+    
+    0..amount
+    |> Enum.map( fn _i ->
+
+      p =
+      Poems.get_random_poem
+      |> Map.get( :content )
+      |> Thesaurus.generate
+
+      case p do
+        { :ok, p } ->
+          { :ok, %Generated_Poem{
+            content: p,
+            from: @by_thesaurus,
+            status: 0
+            } }
+        { :error, reason } -> { :error, reason }
+      end
     end)
   end
 
