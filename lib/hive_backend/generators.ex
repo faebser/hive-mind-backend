@@ -139,6 +139,23 @@ defmodule HiveBackend.Generators do
     end)
   end
 
+  def generate_from_queneau( amount ) do
+
+    { :ok, pid } = Queneau.start_link
+    Queneau.add_all_poems pid, &Poems.get_distinct_poems/0
+
+    0..amount
+    |> Enum.map( fn _i ->
+
+      { :ok, %Generated_Poem{
+        content: Queneau.generate( pid, 10 ),
+        from: @by_markov,
+        status: 0
+      } }
+
+    end)
+  end
+
   def generate_from_thesaurus( amount ) do
     
     0..amount
@@ -160,6 +177,4 @@ defmodule HiveBackend.Generators do
       end
     end)
   end
-
-
 end

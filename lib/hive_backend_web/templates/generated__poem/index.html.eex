@@ -1,5 +1,19 @@
 <h1>Listing Generated poems</h1>
 
+<h2>
+  Generated poems from
+</h2>
+
+
+<span><%= link "101 poems from markov", to: Routes.generated__poem_path(@conn, :markov, amount: 10) %>
+  </span>
+
+  <span><%= link "101 poems from thesaurus", to: Routes.generated__poem_path(@conn, :thesaurus, amount: 10) %>
+  </span>
+
+  <span><%= link "101 poems from queneau", to: Routes.generated__poem_path(@conn, :queneau, amount: 10) %>
+  </span>
+
 <table>
   <thead>
     <tr>

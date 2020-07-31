@@ -4,7 +4,7 @@ defmodule HiveBackend.Generators.Thesaurus do
 
 	use Tesla, only: [ :get ]
 
-	@key Application.compile_env( :hive_backend, :thesaurus_key )
+	@key Application.get_env( :hive_backend, :thesaurus_key )
 
 	plug Tesla.Middleware.BaseUrl, "https://www.dictionaryapi.com/api/v3/references/thesaurus/json"
   	plug Tesla.Middleware.JSON

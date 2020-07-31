@@ -22,6 +22,10 @@ defmodule HiveBackendWeb.Router do
     resources "/poems", PoemController
     resources "/generated_poems", Generated_PoemController
 
+    get "/generate/markov", Generated_PoemController, :markov
+    get "/generate/thesaurus", Generated_PoemController, :thesaurus
+    get "/generate/queneau", Generated_PoemController, :queneau
+
     get "/stats", StatsController, :stats
 
   end

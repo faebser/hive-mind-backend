@@ -1,4 +1,3 @@
-
 defmodule HiveBackend.Poems.Poem do
   use Ecto.Schema
   import Ecto.Changeset

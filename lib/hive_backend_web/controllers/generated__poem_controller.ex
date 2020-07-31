@@ -3,6 +3,7 @@ defmodule HiveBackendWeb.Generated_PoemController do
 
   alias HiveBackend.Generators
   alias HiveBackend.Generators.Generated_Poem
+  alias HiveBackend.Repo
 
   def index(conn, _params) do
     generated_poems = 
@@ -65,5 +66,65 @@ defmodule HiveBackendWeb.Generated_PoemController do
     conn
     |> put_flash(:info, "Generated  poem deleted successfully.")
     |> redirect(to: Routes.generated__poem_path(conn, :index))
+  end
+
+  def markov( con, %{"amount" => amount} ) do
+    { amount, _ } = Integer.parse amount
+    p = Enum.map(Generators.generate_from_markov( amount ), fn p ->
+      case p do
+         { :ok, poem } -> Repo.insert poem
+         { :error, reason } -> { :error, reason }
+      end
+    end)
+
+    l =
+    p
+    |> Enum.filter( fn { status, _ } -> status == :ok end)
+    |> length()
+
+    con
+    |> put_flash(:info, "Generated #{ l } markov poems successfully.")
+    |> redirect(to: Routes.generated__poem_path( con, :index ))
+
+  end
+
+  def thesaurus( con, %{"amount" => amount} ) do
+    { amount, _ } = Integer.parse amount
+    p = Enum.map(Generators.generate_from_thesaurus( amount ), fn p ->
+      case p do
+         { :ok, poem } -> Repo.insert poem
+         { :error, reason } -> { :error, reason }
+      end
+    end)
+
+    l =
+    p
+    |> Enum.filter( fn { status, _ } -> status == :ok end)
+    |> length()
+
+    con
+    |> put_flash(:info, "Generated #{ l } thesaurus poems successfully.")
+    |> redirect(to: Routes.generated__poem_path( con, :index ))
+
+  end
+
+  def queneau( con, %{"amount" => amount} ) do
+    { amount, _ } = Integer.parse amount
+    p = Enum.map(Generators.generate_from_queneau( amount ), fn p ->
+      case p do
+         { :ok, poem } -> Repo.insert poem
+         { :error, reason } -> { :error, reason }
+      end
+    end)
+
+    l =
+    p
+    |> Enum.filter( fn { status, _ } -> status == :ok end)
+    |> length()
+
+    con
+    |> put_flash(:info, "Generated #{ l } queneau poems successfully.")
+    |> redirect(to: Routes.generated__poem_path( con, :index ))
+
   end
 end

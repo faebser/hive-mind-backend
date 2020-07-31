@@ -4,7 +4,7 @@ defmodule HiveBackend.MixProject do
   def project do
     [
       app: :hive_backend,
-      version: "0.3.8",
+      version: "0.4.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -44,7 +44,8 @@ defmodule HiveBackend.MixProject do
       {:plug_cowboy, "~> 2.0"},
       #{:riemannx, "~> 4.0"},
       {:tesla, "~> 1.3"},
-      {:hackney, "~> 1.16"}
+      {:hackney, "~> 1.16"},
+      {:distillery, "~> 2.1"}
     ]
   end
 
