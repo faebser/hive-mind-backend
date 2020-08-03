@@ -53,6 +53,10 @@ defmodule HiveBackend.Generators do
   """
   def get_generated__poem!(id), do: Repo.get!(Generated_Poem, id)
 
+  def get_random_poem() do
+    from( p in Generated_Poem, where: p.status == 0, order_by: fragment("RANDOM()"), limit: 1 ) |> Repo.one()
+  end
+
   @doc """
   Creates a generated__poem.
 
@@ -122,6 +126,10 @@ defmodule HiveBackend.Generators do
     Enum.map( poems, fn p ->  Repo.insert p end)
   end
 
+  def is_valid_utf8?(<<_ :: utf8, rest :: binary>>), do: is_valid_utf8?(rest)
+  def is_valid_utf8?(<<>>), do: :true
+  def is_valid_utf8?(<<_ :: binary>>), do: :false
+
   def generate_from_markov( amount ) do
 
     { :ok, pid } = Markov.start_link
@@ -130,12 +138,17 @@ defmodule HiveBackend.Generators do
     0..amount
     |> Enum.map( fn _i ->
 
-      { :ok, %Generated_Poem{
-        content: Markov.get( pid ),
-        from: @by_markov,
-        status: 0
-      } }
+      c = Markov.get( pid )
 
+      case is_valid_utf8?(c) do
+        true  -> 
+          { :ok, %Generated_Poem{
+            content: Markov.get( pid ),
+            from: @by_markov,
+            status: 0
+          } }
+        false -> { :error, "invalid utf8" }
+      end
     end)
   end
 
@@ -149,7 +162,7 @@ defmodule HiveBackend.Generators do
 
       { :ok, %Generated_Poem{
         content: Queneau.generate( pid, 10 ),
-        from: @by_markov,
+        from: @by_queneau,
         status: 0
       } }
 

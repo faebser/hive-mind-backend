@@ -1,0 +1,3 @@
+<%= for p <- @poems do %>
+<|startoftext|><%= p.content %><|endoftext|>
+<% end %>

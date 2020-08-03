@@ -127,4 +127,8 @@ defmodule HiveBackendWeb.Generated_PoemController do
     |> redirect(to: Routes.generated__poem_path( con, :index ))
 
   end
+
+  def random( conn, _params ) do
+    json conn, Generators.get_random_poem
+  end
 end

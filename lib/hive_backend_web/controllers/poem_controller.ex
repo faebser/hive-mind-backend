@@ -63,4 +63,8 @@ defmodule HiveBackendWeb.PoemController do
   def random(conn, _params) do
     json conn, Poems.get_random_poem
   end
+
+  def dataset( conn, _params ) do
+    render conn, "poem.txt", poems: Poems.get_distinct_poems
+  end
 end

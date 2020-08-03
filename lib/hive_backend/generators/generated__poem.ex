@@ -2,6 +2,8 @@ defmodule HiveBackend.Generators.Generated_Poem do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:content, :id]}
+
   schema "generated_poems" do
     field :content, :string
     field :from, :integer

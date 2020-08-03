@@ -9,5 +9,4 @@ defmodule HiveBackendWeb.StatsView do
   def get_user_count do
   	Repo.aggregate(User, :count, :id)
   end
-  
 end
