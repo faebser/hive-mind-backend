@@ -10,6 +10,8 @@ defmodule HiveBackendWeb.StatsController do
 
   alias HiveBackend.Accounts.User
 
+  alias HiveBackend.Generators
+
   # add d3 graphs
 
 
@@ -78,6 +80,10 @@ defmodule HiveBackendWeb.StatsController do
 
     by_day_avg = length( poems ) / length( by_day )
 
+    no_rating = Generators.get_all_poems_with_no_rating
+    good_rating = Generators.get_all_poems_with_good_rating()
+    bad_rating = Generators.get_all_poems_with_bad_rating()
+
     user_id_to_uuid = 
     Enum.map( users, fn user -> { user.id, user.user_uuid } end )
     |> Enum.into( %{} )
@@ -122,7 +128,10 @@ defmodule HiveBackendWeb.StatsController do
       by_day: by_day,
       by_day_avg: by_day_avg,
       by_day_detail: by_day_detail,
-      last_7_days_user: last_7_days_user
+      last_7_days_user: last_7_days_user,
+      l_good_rating: length( good_rating ),
+      l_bad_rating: length( bad_rating ),
+      l_no_rating: length( no_rating ),
       })
   end
 end

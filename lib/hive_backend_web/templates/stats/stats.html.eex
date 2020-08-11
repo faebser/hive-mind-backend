@@ -10,6 +10,12 @@
 
 <p>A total of <%= @poems_count %>, on average <%= @by_day_avg %> per day</p>
 
+<h2>Generated Poems</h2>
+
+<p>No rating: <%= @l_no_rating %> </p>
+<p>good rating: <%= @l_good_rating %> </p>
+<p>bad rating: <%= @l_bad_rating %> </p>
+
 <h2>Active in the last seven days</h2>
 
 <ul>

@@ -16,12 +16,24 @@ defmodule HiveBackend.Generators do
   @by_queneau 2
   @by_thesaurus 3
 
+  @no_rating 0
+  @approved 1
+  @rejected 2 
+
   def by_markov do
     @by_markov
   end
 
   def by_queneau do
     @by_queneau
+  end
+
+  def approved do
+    @approved
+  end
+
+  def rejected do
+    @rejected
   end
 
   @doc """
@@ -54,7 +66,23 @@ defmodule HiveBackend.Generators do
   def get_generated__poem!(id), do: Repo.get!(Generated_Poem, id)
 
   def get_random_poem() do
-    from( p in Generated_Poem, where: p.status == 0, order_by: fragment("RANDOM()"), limit: 1 ) |> Repo.one()
+    from( p in Generated_Poem, where: p.status == @no_rating, order_by: fragment("RANDOM()"), limit: 1 ) |> Repo.one()
+  end
+
+  def get_ten_random_poems() do
+    from( p in Generated_Poem, where: p.status == @no_rating, order_by: fragment("RANDOM()"), limit: 10 ) |> Repo.all()
+  end
+
+  def get_all_poems_with_no_rating() do
+    from( p in Generated_Poem, where: p.status == @no_rating ) |> Repo.all 
+  end
+
+  def get_all_poems_with_good_rating() do
+    from( p in Generated_Poem, where: p.status == @approved ) |> Repo.all 
+  end
+
+  def get_all_poems_with_bad_rating() do
+    from( p in Generated_Poem, where: p.status == @rejected ) |> Repo.all
   end
 
   @doc """

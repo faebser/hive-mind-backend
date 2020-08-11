@@ -5,6 +5,9 @@ defmodule HiveBackendWeb.Generated_PoemController do
   alias HiveBackend.Generators.Generated_Poem
   alias HiveBackend.Repo
 
+  @approved 1
+  @rejected 2  
+
   def index(conn, _params) do
     generated_poems = 
     Generators.list_generated_poems()
@@ -129,6 +132,30 @@ defmodule HiveBackendWeb.Generated_PoemController do
   end
 
   def random( conn, _params ) do
-    json conn, Generators.get_random_poem
+    p = Generators.get_ten_random_poems()
+    
+    json conn, p
+  end
+
+  def approve( conn, %{ "id" => id }) do
+    IO.inspect( id )
+
+    generated__poem = Generators.get_generated__poem!( id )
+
+    case Generators.update_generated__poem(generated__poem, %{ :status => Generators.approved } ) do
+      {:ok, _generated__poem} -> json( conn, "ok" )
+      {:error, %Ecto.Changeset{} = changeset} -> json( conn, changeset )
+    end
+  end
+
+  def reject( conn, %{ "id" => id }) do
+    IO.inspect( id )
+
+    generated__poem = Generators.get_generated__poem!( id )
+
+    case Generators.update_generated__poem(generated__poem, %{ :status => Generators.rejected } ) do
+      {:ok, _generated__poem} -> json( conn, "ok" )
+      {:error, %Ecto.Changeset{} = changeset} -> json( conn, changeset )
+    end
   end
 end

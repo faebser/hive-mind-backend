@@ -40,6 +40,9 @@ defmodule HiveBackendWeb.Router do
     get "/new-user", NewUserController, :new
     get "/random", PoemController, :random
     get "/generated/random", Generated_PoemController, :random
+    post "/generated/approve/:id", Generated_PoemController, :approve
+    post "/generated/reject/:id", Generated_PoemController, :reject
+    get "/generated/random", Generated_PoemController, :random
 
     get "/dataset", PoemController, :dataset
     
