@@ -59,4 +59,9 @@ defmodule HiveBackendWeb.ThemeController do
     |> put_flash(:info, "Theme deleted successfully.")
     |> redirect(to: Routes.theme_path(conn, :index))
   end
+
+  def dataset( conn, _params ) do
+    render conn, "dataset.txt", themes: Poems.list_themes
+  end
+
 end
