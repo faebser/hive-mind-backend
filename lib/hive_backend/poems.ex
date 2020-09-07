@@ -21,6 +21,10 @@ defmodule HiveBackend.Poems do
     Repo.all(Theme)
   end
 
+  def list_theme_by_date do
+    from(Theme, order_by: [ desc: :date_for ]) |> Repo.all
+  end
+
   @doc """
   Gets a single theme.
 

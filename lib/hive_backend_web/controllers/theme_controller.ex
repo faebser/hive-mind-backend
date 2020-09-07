@@ -5,7 +5,7 @@ defmodule HiveBackendWeb.ThemeController do
   alias HiveBackend.Poems.Theme
 
   def index(conn, _params) do
-    themes = Poems.list_themes()
+    themes = Poems.list_theme_by_date()
     render(conn, "index.html", themes: themes)
   end
 
