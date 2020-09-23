@@ -138,7 +138,6 @@ defmodule HiveBackendWeb.Generated_PoemController do
   end
 
   def approve( conn, %{ "id" => id }) do
-    IO.inspect( id )
 
     generated__poem = Generators.get_generated__poem!( id )
 
@@ -149,7 +148,6 @@ defmodule HiveBackendWeb.Generated_PoemController do
   end
 
   def reject( conn, %{ "id" => id }) do
-    IO.inspect( id )
 
     generated__poem = Generators.get_generated__poem!( id )
 
@@ -157,5 +155,9 @@ defmodule HiveBackendWeb.Generated_PoemController do
       {:ok, _generated__poem} -> json( conn, "ok" )
       {:error, %Ecto.Changeset{} = changeset} -> json( conn, changeset )
     end
+  end
+
+  def dataset( conn, _params ) do
+    render conn, "poem.txt", poems: Generators.get_all_poems_with_good_rating
   end
 end

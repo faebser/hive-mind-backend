@@ -45,6 +45,7 @@ defmodule HiveBackendWeb.Router do
 
     get "/dataset", PoemController, :dataset
     get "/theme-dataset", ThemeController, :dataset
+    get "/generated-dataset", Generated_PoemController, :dataset
     
     get "/:uuid", UserController, :get_poems
   end
