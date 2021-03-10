@@ -123,12 +123,35 @@
 	}
 
 	p,
-	ol li {
+	ol li,
+	form input {
 		font-family: 'cormorant_garamondmedium';
 		font-size: var(--s0);
 		font-weight: normal;
 		line-height: 1.4;
 		margin: 0;
+	}
+
+	form input {
+		font-size: var(--s-1);
+	}
+
+	form p {
+		margin: 0;
+	}
+
+	form input {
+		width: 100%;
+	}
+
+	form a {
+		font-size: 0.5em;
+	}
+
+	form input + input {
+		margin-top: 0.5rem;
+		font-family: 'space_groteskmedium';
+		text-transform: uppercase;
 	}
 
 	ol {
@@ -217,7 +240,7 @@
 		  		<div class="stack">
 		    		<p>The Poetic Hivemind<sup>1</sup> is a quiet app that asks you to write a poem or text to a given theme every day.</p>
 		    		<p>
-						Inspired by the dérive<sup>2</sup> devised by the Letterist International<sup>3</sup> and the Situationist International<sup>4</sup> the app will give you a theme, a paragraph or two, that should inspire go for a walk and see your mundane surroundings in a different, maybe even more romantic and poetic, way.
+						Inspired by the dérive<sup>2</sup> devised by the Letterist International<sup>3</sup> and the Situationist International<sup>4</sup> the app will give you a theme, a paragraph or two, that should inspire you to go for a walk and see your mundane surroundings in a different, maybe even more romantic and poetic, way.
 					</p>
 					<p>
 						The continuous occupation with texts and poems should strengthen your poetic intention. The involvement in the collective authorship of training an AI to generate poems should alleviate fears that come with expressing one self.
@@ -240,10 +263,29 @@
 			</div>
 		</div>
 
-		<div id="buttons" class="stack">
-			<a href="https://apps.apple.com/us/app/the-poetic-hivemind/id1498430507?ls=1">To the App Store</a>
-			<a href="https://play.google.com/store/apps/details?id=tofu.wtf.hive_poetry_mind">To the Play Store</a>
+		<div class="stack">
+			<p>The project has ended and the applications are not active any more. Please subscribe below to stay up to date.</p>
 		</div>
+
+		<form
+		  action="https://buttondown.email/api/emails/embed-subscribe/the_poetic_hivemind"
+		  method="post"
+		  target="popupwindow"
+		  onsubmit="window.open('https://buttondown.email/the_poetic_hivemind', 'popupwindow')"
+		  class="embeddable-buttondown-form with-sidebar"
+		>
+			<div>
+	  			<p><label for="bd-email">Enter your email →</label></p>
+		  
+		  		<p>
+					<input type="email" name="email" id="bd-email" />
+					<input type="hidden" value="1" name="embed" />
+					<input type="submit" value="Subscribe" />
+
+					<a href="https://buttondown.email" target="_blank">Powered by Buttondown.</a>
+			  </p>
+		  </div>
+		</form>
 
 	</main>
 
